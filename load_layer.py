@@ -7,6 +7,7 @@ file_dir = QFileDialog.getExistingDirectory(parent, "Folder to save layers", hom
 print(file_dir)
 geometr_list = ['Point', 'Line', 'Polygon']
 
+
 while True:
     name, ok = QInputDialog.getText(parent, 'Nowa warstwa', 'Podaj nazwę warstwy')
     layer_dir = f'{file_dir}\{name}.shp'
@@ -15,7 +16,8 @@ while True:
     else:
         print("Nazwa warstwy: ", name)
         geometr, ok2 = QInputDialog.getItem(parent, 'Typ geometrii', 'Jaką geometrię ma mieć warstwa?', geometr_list, editable=False)
-                
+        layerFields = QgsFields()
+        
         if geometr == 'Point':
             writer = QgsVectorFileWriter(layer_dir, 'UTF-8', layerFields, QgsWkbTypes.Point, QgsCoordinateReferenceSystem('EPSG:2180'), 'ESRI Shapefile')
         elif geometr == 'Line':
